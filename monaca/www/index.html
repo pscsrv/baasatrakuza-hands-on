@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <script src="https://unpkg.com/angularjs-onsenui@1.0.1/dist/angularjs-onsenui.js"></script>
+
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/grid-gallery.min.css">
+    <link rel="stylesheet" href="css/master.min.css">
+
+    <script>
+        //// テナントにアクセスするためのキーを設定します。
+        var TENANT_KEY = '{YOUR.TENANT.KEY}';
+        var USER_ACCESS_TOKEN_KEY = 'userAccessToken';
+
+        var module = ons.bootstrap();
+
+        if (ons.platform.isIPhoneX()) {
+            document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+            document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+        }
+    </script>
+
+    <script src="js/controllers/PhotoController.js"></script>
+    <script src="js/controllers/PreviewController.js"></script>
+    <script src="js/services/DateService.js"></script>
+
+</head>
+<body>
+    <ons-navigator var="navi" page="photo.html"></ons-navigator>
+
+    <ons-template id="photo.html">
+        <ons-page ng-controller="PhotoController as app">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center">写真一覧</div>
+                <div class="right">
+                    <ons-toolbar-button ng-click="onPhotograph();"><ons-icon icon="camera"></ons-icon></ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+
+            <div class="progress" ng-if="app.isLoading">
+                <ons-progress-circular indeterminate></ons-progress-circular>
+            </div>
+
+            <section style="padding: 10px">
+                <div class="gg-box">
+                    <div class="gg-item" ng-repeat="photo in app.photos">
+                        <img src="{{photo.attributes.photo_url}}" ng-click="onSelectPhoto(photo);">
+                        <div class="iine_list">
+                            <img ng-if="photo.attributes.sys_favorite.is_favorite==0" class="iine" src="img/heart_off.png">
+                            <img ng-if="photo.attributes.sys_favorite.is_favorite==1" class="iine" src="img/heart_on.png">
+                            <div ng-style="{color: photo.attributes.sys_favorite.is_favorite==1 ? '#df5656' : '#4b4b4b', 'padding-left': '28px'}">{{photo.attributes.sys_favorite_sum.favorite_count}}</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="preview.html">
+        <ons-page ng-controller="PreviewController as app">
+            <div class="picturebox" style="background-image: url({{app.photo.attributes.photo_url}});" ng-click="onClose();"></div>
+            <img class="close" src="img/close.png" ng-click="onClose();">
+            <div class="iine_preview">
+                <img ng-if="app.photo.attributes.sys_favorite.is_favorite==0" class="iine" src="img/heart_off.png" ng-click="onAddIine();">
+                <img ng-if="app.photo.attributes.sys_favorite.is_favorite==1" class="iine" src="img/heart_on.png" ng-click="onDeleteIine();">
+            </div>
+        </ons-page>
+    </ons-template>
+
+    <script type="text/javascript" src="js/grid-gallery.min.js"></script>
+
+</body>
+</html>

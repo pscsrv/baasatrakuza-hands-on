@@ -1,0 +1,66 @@
+/**/
+.progress {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gg-item {
+    position: relative;
+}
+img {
+    position: relative;
+}
+div.iine_list {
+    position: absolute;
+    background-color: rgba( 255, 255, 255, 0.60 );
+    left: 0;
+    width: 100%;
+    height: 30px;
+    bottom: 0;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
+    align-items: center; /* 縦方向中央揃え */
+}
+div.iine_list img.iine {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 4px;
+    left: 4px;
+}
+div.iine_list div.iine_count {
+    height: 100%;
+    widows: 100%;
+}
+div.picturebox {
+    /* display: table; */
+    width: 100%;
+    height: 100%;
+    background-position:center center;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-color: black;
+}
+div.iine_preview {
+    position: absolute;
+    background-color: rgba( 255, 255, 255, 0.00 );
+    width: 100%;
+    height: 80px;
+    bottom: 0;
+}
+div.iine_preview img.iine {
+    width: 64px;
+    height: 64px;
+    top: 0px;
+    left: 32px;
+}
+img.close {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 16px;
+    right: 16px;
+}
+
