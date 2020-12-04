@@ -52,7 +52,7 @@ module.controller('PhotoController', function ($scope, $q, $timeout, DateService
             var date = DateService.format(new Date(), 'yyyyMMddHHmmssSSS');
 
             // ----- API 記述箇所６ [START] ---
-            // ----- API 記述箇所６ [START] ---
+            // ----- API 記述箇所６ [E N D] ---
         },
         function (error) {
             alert(JSON.stringify(error, null, ' '));
